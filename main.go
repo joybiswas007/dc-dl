@@ -6,6 +6,8 @@ import (
 
 	"strings"
 
+	"net/url"
+
 	"github.com/joho/godotenv"
 )
 
@@ -23,6 +25,17 @@ func main() {
 	for {
 		if strings.ToLower(strings.TrimSpace(userInput)) == "q" {
 			fmt.Println("Exiting the downloader.")
+			break
+		}
+
+		parsedUrl, err := url.Parse(userInput)
+		if err != nil {
+			fmt.Println("Error parsing url", err)
+			break
+		}
+
+		if !dhakacomics.UrlValidOrNot(parsedUrl, "digital-comics") {
+			fmt.Println("Invalid url")
 			break
 		}
 
