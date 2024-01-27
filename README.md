@@ -1,10 +1,17 @@
 # Dhaka Comics Downloader in Go
 
-A simple Go application to download digital purchased comics from Dhaka Comics.
+A tool written in go to download purchased digital comics from Dhaka Comics.
 
 ## Overview
 
-This application allows you to download purchased or free digital comics from Dhaka Comics.
+This application allows you to download only purchased or free digital comics from Dhaka Comics.
+
+| Descriptions                            | Notes                                                                                    |
+| --------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Internet Connection Required**        | Requires an active internet connection to download digital comics.                         |
+| **Legal Restrictions**                  | Abides by legal restrictions and does not support downloading comics illegally.           |
+| **Doesn't Bypass Premium Content**      | This tool does not bypass premium content restrictions; it adheres to access permissions.  |
+
 
 ## Features
 
@@ -41,6 +48,8 @@ you'll find the `X-Csrf-Ump-Token` and copy the value and paste in .env.
 Use any user agent you like.
 
 4. Run it: `go run ./main.go` 
+
+Valid url type: `https://www.dhakacomics.com/digital-comics/comic-name`
 
 ## Disclaimer
 * This tool was written for educational purposes. I will not be responsible if you use this program in bad faith.
