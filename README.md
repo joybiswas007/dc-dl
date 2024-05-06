@@ -6,51 +6,47 @@ A tool written in go to download purchased digital comics from Dhaka Comics.
 
 This application allows you to download only purchased or free digital comics from Dhaka Comics.
 
-| Descriptions                            | Notes                                                                                    |
-| --------------------------------------- | ---------------------------------------------------------------------------------------- |
-| **Internet Connection Required**        | Requires an active internet connection to download digital comics.                         |
-| **Legal Restrictions**                  | Abides by legal restrictions and does not support downloading comics illegally.           |
-| **Doesn't Bypass Premium Content**      | This tool does not bypass premium content restrictions; it adheres to access permissions.  |
+# NOTE
 
+-   **To download a comic, you need to have premium account. Please do not attempt to use this tool unless you've premium account.**
+- **This tool does not bypass premium content restrictions.**
+-   **DI am NOT held responsible for your account getting suspended as a result from the use of this program!**
+-   This program is WIP, the code is provided as-is and I am not held resposible for any legal issues resulting from the use of this program.
 
-## Features
+# Description
 
-- Download comics from Dhaka Comics using the provided URL.
-- Organize downloads in a "downloads" directory.
-- Display progress information during the download process.
+Linux is the primary development OS (Windows, Mac untested).
 
-## Prerequisites
+_**Note**:_ _You will need to download and install these manually!_
 
-- Go (Golang) installed on your system.
+-   [Go](https://go.dev/dl/)
 
+# Build & Installation
 
-## Install
+Clone the repository: `git clone https://github.com/joybiswas007/dc-dl` <br/>
+Tidy up the Go modules: `go mod tidy` <br/>
+Build the project. You can use one of the following commands based on your operating system: <br/>
+For all platforms: `make build` <br/>
+For Linux: `make build-linux`
 
-To use this application
+# Usage
 
-1. Clone the repo: `git clone https://github.com/joybiswas007/dhakacomics-dl`
-2. Install required packages: `go mod download`
-3. Fill the .env file:
-```
-COOKIE="paste your cookie here"
-VIEW_COMIC=https://www.dhakacomics.com/view-comic
-X_CSRF_UMP_TOKEN="UMP TOKEN here"
-USER_AGENT="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+Visit Dhakacomics.com and export cookie file as netscape format and put it inside `cookies` diretory
+as `cookies.txt` file use any firefox or chrome extension.
 
-```
-To get the cookie after loggin  open network tab and select `www.dhakacomics.com` and
-from `Request Headers` get the Cookie value and paste it inside the .env file. 
+```dc-dl --help
+A CLI app which allows you to download free and purchased comics from dhaka comics
 
-To get the UMP token open any digital comic and open the network tab and filter results 
-using `Fetch/XHR` and click on the `view-comic` and check  `Request Headers` from there
-you'll find the `X-Csrf-Ump-Token` and copy the value and paste in .env.
+Usage:
+  dc-dl [flags]
 
-Use any user agent you like.
+Flags:
+  -h, --help         help for dc-dl
+      --url string   Pass comic url you want to download
 
-4. Run it: `go run ./main.go` 
-
-Valid url type: `https://www.dhakacomics.com/digital-comics/comic-name`
+dc-dl --url https://www.dhakacomics.com/digital-comics/durjoy-1
+``
 
 ## Disclaimer
 * This tool was written for educational purposes. I will not be responsible if you use this program in bad faith.
-* `dhakacomics-dl` is not affiliated with Dhaka Comics.
+* `dc-dl` is not affiliated with Dhaka Comics.

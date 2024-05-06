@@ -1,55 +1,40 @@
-package dhakacomics
+package client
 
 import (
 	"log"
 	"net/http"
-	"os"
 	"regexp"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
-// PageData represents the structured data you want to extract from the page.
-type PageData struct {
-	Title     string
-	Author    string
-	AuthorURL string
-	CoverURL  string
-	ComicID   string
-	WpNonce   string
-}
-
-// FetchPageData will fetch the page data from the specified URL.
-func FetchPageData(url string) ([]PageData, error) {
-	UserAgent := os.Getenv("USER_AGENT")
-	Cookie := os.Getenv("COOKIE")
-	// Initialize HTTP client
+func (s *DCSession) GetComicData(comicURL string) ([]ComicData, error) {
 	client := &http.Client{}
 
-	// Create HTTP request
-	req, err := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest("GET", comicURL, nil)
 	if err != nil {
-		return nil, err
+		return []ComicData{}, err
 	}
-	req.Header.Set("authority", "www.dhakacomics.com")
-	req.Header.Set("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7")
-	req.Header.Set("accept-language", "en-US,en;q=0.9")
-	req.Header.Set("cookie", Cookie)
-	req.Header.Set("referer", "https://www.dhakacomics.com/my-account")
-	req.Header.Set("sec-ch-ua", `"Not_A Brand";v="8", "Chromium";v="120"`)
-	req.Header.Set("sec-ch-ua-mobile", "?0")
-	req.Header.Set("sec-ch-ua-platform", `"Linux"`)
-	req.Header.Set("sec-fetch-dest", "document")
-	req.Header.Set("sec-fetch-mode", "navigate")
-	req.Header.Set("sec-fetch-site", "same-origin")
-	req.Header.Set("sec-fetch-user", "?1")
-	req.Header.Set("upgrade-insecure-requests", "1")
-	req.Header.Set("user-agent", UserAgent)
-	// Perform the request
+	req.Header.Set("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0")
+	req.Header.Set("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8")
+	req.Header.Set("Accept-Language", "en-US,en;q=0.5")
+	// req.Header.Set("Accept-Encoding", "gzip, deflate, br")
+	req.Header.Set("DNT", "1")
+	req.Header.Set("Sec-GPC", "1")
+	req.Header.Set("Connection", "keep-alive")
+	req.Header.Set("Referer", "https://www.dhakacomics.com/my-account")
+	req.Header.Set("Cookie", s.Cookieheader)
+	req.Header.Set("Upgrade-Insecure-Requests", "1")
+	req.Header.Set("Sec-Fetch-Dest", "document")
+	req.Header.Set("Sec-Fetch-Mode", "navigate")
+	req.Header.Set("Sec-Fetch-Site", "same-origin")
+	req.Header.Set("Sec-Fetch-User", "?1")
+	req.Header.Set("TE", "trailers")
+
 	resp, err := client.Do(req)
 	if err != nil {
-		return nil, err
+		return []ComicData{}, err
 	}
 	defer resp.Body.Close()
 
@@ -59,11 +44,11 @@ func FetchPageData(url string) ([]PageData, error) {
 		return nil, err
 	}
 
-	var results []PageData
+	var results []ComicData
 
 	// Extract the page banner data
 	doc.Find("#page-banner").Each(func(i int, s *goquery.Selection) {
-		var data PageData
+		var data ComicData
 
 		data.Title = s.Find(".page-profile-title").Find("h1").Text()
 		data.Author = s.Find(".page-profile-title").Find("h2").Text()
