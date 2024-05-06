@@ -1,16 +1,16 @@
-# Dhaka Comics Downloader in Go
+# Dhaka Comics Downloader
 
-A tool written in go to download purchased digital comics from Dhaka Comics.
+Download purchased digital comics from Dhaka Comics.
 
 ## Overview
 
-This application allows you to download only purchased or free digital comics from Dhaka Comics.
+This CLI app allows you to download purchased or free digital comics from Dhaka Comics.
 
 # NOTE
 
 -   **To download a comic, you need to have premium account. Please do not attempt to use this tool unless you've premium account.**
 - **This tool does not bypass premium content restrictions.**
--   **DI am NOT held responsible for your account getting suspended as a result from the use of this program!**
+-   **I am NOT held responsible for your account getting suspended as a result from the use of this program!**
 -   This program is WIP, the code is provided as-is and I am not held resposible for any legal issues resulting from the use of this program.
 
 # Description
