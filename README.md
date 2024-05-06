@@ -45,8 +45,8 @@ Flags:
       --url string   Pass comic url you want to download
 
 dc-dl --url https://www.dhakacomics.com/digital-comics/durjoy-1
-``
+```
 
-## Disclaimer
+# Disclaimer
 * This tool was written for educational purposes. I will not be responsible if you use this program in bad faith.
 * `dc-dl` is not affiliated with Dhaka Comics.
