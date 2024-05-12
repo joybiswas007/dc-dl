@@ -44,7 +44,7 @@ func (s *DCSession) DownloadComic(comicName string) error {
 		return err
 	}
 
-	downloadsDir := filepath.Join(pwd, "Comics Downloads")
+	downloadsDir := filepath.Join(pwd, "DC-DL")
 	if _, err := os.Stat(downloadsDir); os.IsNotExist(err) {
 		os.Mkdir(downloadsDir, 0755)
 	}
