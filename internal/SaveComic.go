@@ -42,7 +42,7 @@ func SaveComic(cmd *cobra.Command, args []string) {
 
 	data, err := s.GetComicData(comicURL)
 	if err != nil {
-		logger.Warn("Failed to fetch comic data ˙◠˙.")
+		logger.Warn("Failed to fetch comic data probably cookies expired. Try updating cookies ˙◠˙.")
 		os.Exit(1)
 	}
 
